@@ -1,8 +1,15 @@
 package factory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import utils.ConfigReader;
 
@@ -18,11 +25,47 @@ public class DriverFactory {
 
         if (browser.equalsIgnoreCase("chrome")) {
 
-            webDriver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+
+            Map<String, Object> prefs = new HashMap<>();
+
+            prefs.put("credentials_enable_service", false);
+
+            prefs.put("profile.password_manager_leak_detection", false);
+
+            options.setExperimentalOption("prefs", prefs);
+
+            webDriver = new ChromeDriver(options);
+
+        } else if (browser.equalsIgnoreCase("edge")) {
+
+            EdgeOptions options = new EdgeOptions();
+
+            Map<String, Object> prefs = new HashMap<>();
+
+            prefs.put("credentials_enable_service", false);
+
+            prefs.put("profile.password_manager_leak_detection", false);
+
+            options.setExperimentalOption("prefs", prefs);
+
+            webDriver = new EdgeDriver(options);
 
         } else if (browser.equalsIgnoreCase("firefox")) {
 
-            webDriver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+
+            options.addPreference(
+                    "signon.rememberSignons",
+                    false
+            );
+
+            options.addPreference(
+                    "security.password_lifetime",
+                    0
+            );
+
+            webDriver = new FirefoxDriver(options);
 
         } else {
 
