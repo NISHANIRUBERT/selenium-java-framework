@@ -1,0 +1,22 @@
+# Maven
+target/
+
+# Allure
+allure-results/
+allure-report/
+.allure/
+
+# TestNG
+test-output/
+
+# Screenshots generated during execution
+screenshots/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db

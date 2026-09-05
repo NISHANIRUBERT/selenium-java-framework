@@ -1,0 +1,26 @@
+[
+	{
+		"username":"standard_user",
+		"password":"secret_sauce",
+		"firstName": "Nisha",
+		"lastName":"Tester",
+		"zipCode":"14656"
+	},
+	{
+		"username":"problem_user",
+		"password":"secret_sauce",
+		"firstName": "Nishani",
+		"lastName":"test",
+		"zipCode":"49762"
+		
+	},
+	{
+		"username":"performance_glitch_user",
+		"password":"secret_sauce",
+		"firstName": "Nisha",
+		"lastName":"kuif",
+		"zipCode":"12468"
+		
+	}
+	
+]
