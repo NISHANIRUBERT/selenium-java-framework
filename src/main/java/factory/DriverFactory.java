@@ -21,6 +21,10 @@ public class DriverFactory {
 
         String browser = ConfigReader.get("browser");
 
+        boolean headless = Boolean.parseBoolean(
+                ConfigReader.get("headless")
+        );
+
         WebDriver webDriver;
 
         if (browser.equalsIgnoreCase("chrome")) {
@@ -30,10 +34,14 @@ public class DriverFactory {
             Map<String, Object> prefs = new HashMap<>();
 
             prefs.put("credentials_enable_service", false);
-
             prefs.put("profile.password_manager_leak_detection", false);
 
             options.setExperimentalOption("prefs", prefs);
+
+            if (headless) {
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+            }
 
             webDriver = new ChromeDriver(options);
 
@@ -44,10 +52,14 @@ public class DriverFactory {
             Map<String, Object> prefs = new HashMap<>();
 
             prefs.put("credentials_enable_service", false);
-
             prefs.put("profile.password_manager_leak_detection", false);
 
             options.setExperimentalOption("prefs", prefs);
+
+            if (headless) {
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+            }
 
             webDriver = new EdgeDriver(options);
 
@@ -64,6 +76,10 @@ public class DriverFactory {
                     "security.password_lifetime",
                     0
             );
+
+            if (headless) {
+                options.addArguments("-headless");
+            }
 
             webDriver = new FirefoxDriver(options);
 
