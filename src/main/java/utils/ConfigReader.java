@@ -10,9 +10,10 @@ public class ConfigReader {
 
     static {
         try {
+        	properties = new Properties();
             FileInputStream file = new FileInputStream("src/test/resources/config.properties");
 
-            properties = new Properties();
+            
             properties.load(file);
 
             file.close();
@@ -25,6 +26,12 @@ public class ConfigReader {
     }
 
     public static String get(String key) {
+        String systemProperty = System.getProperty(key);
+
+        if (systemProperty != null && !systemProperty.isEmpty()) {
+            return systemProperty;
+        }
+
         return properties.getProperty(key);
     }
     
